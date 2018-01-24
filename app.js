@@ -8,6 +8,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
-
+load('routes').into(app);
 
 export default app;
