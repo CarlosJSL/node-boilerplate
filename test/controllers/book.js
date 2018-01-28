@@ -3,20 +3,13 @@ import booksController from '../../controllers/book';
 import Book from '../../models/book';
 import httpMocks from 'node-mocks-http';
 
-describe('test', ()  =>{
-	it('should pass',  () => {
-		
-		const req = httpMocks.createRequest();
+describe('test',   ()  =>{
+	it('should pass',  async () => {
+		const request = httpMocks.createRequest();
 		const response = httpMocks.createResponse();
-		const expectedResponse = [];
 
-		const getAllBooksFake = sinon.stub(booksController, 'getAllBooks');
+		 await booksController.getAllBooks(request, response);
 
-		getAllBooksFake.withArgs({}).resolves(expectedResponse);
-
-		booksController.getAllBooks(req,response)
-			.then((res) => {
-				console.log(res);
-			});
+		 sinon.assert.match(response._getData(), []);
 	});
 });
