@@ -1,9 +1,12 @@
-import loadDatabase from '../config/datasource';
-const Book = loadDatabase().models.Books;
+import bookRepository from '../repositories/book';
 
-exports.getAllBooks = (req, res) => {
-	Book.findAll({})
-		.then(result => res.status(200).send(result))
-		.catch(err => res.status(500).send(err));
+exports.getAllBooks =  async  (req, res) =>  {
+	try {
+		const result =  await bookRepository.findAll();
+		res.status(200).send(result);
+
+	} catch (err) {
+		res.status(500).send({message: 'Ocorreu um erro durante o processamento da requisição'});
+	}
 }; 
 
